@@ -2,20 +2,24 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/catalog'
+  },
+  { 
     path: '/catalog',
     component: () => import('../views/Catalog.vue'),
     children: [
       {
-        name: 'Good', 
-        path: 'good/:id',
-        component: () => import('../views/Good.vue')     
-      },
-      // {
-      //   name: 'Category', 
-      //   path: ':category',
-      //   component: () => import('../components/Item.vue')     
-      // }
-    ]
+        name: 'Category', 
+        path: ':category',
+        component: () => import('../views/Category.vue')     
+      }
+   ]
+  },
+  {
+    name: 'Good', 
+    path: '/catalog/:category/:id',
+    component: () => import('../views/Good.vue')
   },
   {
     path: '/cart',
@@ -24,6 +28,14 @@ const routes = [
   {
     path: '/login',
     component: () => import('../views/Authorization.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  },
+  {
+    path:'/404',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 

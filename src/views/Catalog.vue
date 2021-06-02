@@ -1,28 +1,31 @@
 <template>
-    <shop-header :background="background" :tabs="tabs"></shop-header>
-    <!-- <sub-catalog :tabs="subTabs"></sub-catalog> -->
-    <div v-for="good in availableGoods" :key="good.id">
-    <!-- <h2>{{ good.name }}</h2> -->
-    <router-link :to="{name: 'Good', params: {id: good.id}}">{{ good.name }}</router-link>
+<div class="wrapper">
+  <div class="categories col-3">
+    <div v-for="i in categoriesName" :key="i.cat">
+      <router-link :to="{name: 'Category', params: {category: i.cat}}">
+        {{ i.cat }}
+      </router-link>
+    </div>
   </div>
-  <div>{{ $route.params.id }}</div>
+    <div class="goods col-9">
+      <router-view/>
+    </div>
+</div>
 </template>
 
 <script>
-import ShopHeader from '../components/ShopHeader.vue';
 import {mapGetters} from 'vuex';
 export default {
     name: "Catalog",
-    components: {ShopHeader},
     computed: {
     ...mapGetters(['availableGoods', 'categoriesName']), 
-  }
+    }
 }
 </script>
 
 
 <style scoped>
-div {
+/* div {
     display: flex;
     justify-content:space-around;
     flex-direction: row;
@@ -41,5 +44,43 @@ div a {
 
 .router-link-active {
     background-color: orangered;
+} */
+.wrapper {
+    display: flex;
+    justify-content:space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    /* align-items: right; */
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgba(248, 240, 240, 0.644);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.goods {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  
+}
+.col-3 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-9 {
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
 }
 </style>

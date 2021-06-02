@@ -1,10 +1,10 @@
 <template>
-    <h1>Authorization</h1>
+  Ресурс не найден
 </template>
 
 <script>
 export default {
-    name: 'Authorization',
+    name: "NotFound"
 }
 </script>
 

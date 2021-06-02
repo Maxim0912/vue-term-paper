@@ -1,13 +1,18 @@
 <template>
-    <shop-header :background="background" :tabs="tabs"></shop-header>
     <h1>Cart</h1>
+    <div v-for="item in goodInCart" :key="item.id">
+        <p>{{ item.shortName }}</p>
+        <p>Количество: {{ item.qtyInCart }}</p>
+    </div>
 </template>
 
 <script>
-import ShopHeader from '../components/ShopHeader.vue'
+import {mapGetters} from 'vuex';
 export default {
     name: 'Cart',
-    components: { ShopHeader },
+    computed: {
+    ...mapGetters(['goodInCart']), 
+    },
 }
 </script>
 
